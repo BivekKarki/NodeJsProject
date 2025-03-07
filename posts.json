@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "userid": 1,
+        "title": "first post"
+    },
+    {
+        "id": 2,
+        "userid": 2,
+        "title": "sec post"
+    },
+    {
+        "id": 3,
+        "userid": 3,
+        "title": "third post"
+    },
+    {
+        "id": 4,
+        "userid": 4,
+        "title": "Forth post"
+    }
+]
