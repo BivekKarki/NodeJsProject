@@ -17,5 +17,8 @@ fs.readFile('users.json', 'utf-8')
     })
     .catch((error)=>{
         console.log(error);
-    });
+    })
+    .finally(()=>{
+        console.log("This is fine code");
+    })
 
