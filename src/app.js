@@ -1,10 +1,22 @@
 import express from 'express';
+import dotenv from 'dotenv';
 
+const port = process.env.PORT || 5000;
 const app = express();
 
+dotenv.config();
+
+// app.get("/", (req, res)=>{
+//     res.send("<h1>Home Page</h1>");
+//     // res.status(401).json({message: "Hello"});
+// })
+
 app.get("/", (req, res)=>{
-    res.send("<h1>Home Page</h1>");
-    // res.status(401).json({message: "Hello"});
+    res.json({
+        status: "OK",
+        version: "1.0.0",
+        port: port,
+    })
 })
 
 app.get("/about", (req, res)=>{
@@ -21,13 +33,15 @@ app.get("/products", (req, res)=>{
 
 app.get("/products/:id", (req, res)=>{
     const id = req.params.id;
+    const query = req.query;
+    console.log(query)
     res.send(`<h1>Product by id: ${id}</h1>`);
 })
 
 
 
-app.listen(5000,()=>{
-    console.log("Server started at port 5000...")
+app.listen(port,()=>{
+    console.log(`Server started at port ${port}...`)
 })
 
 
