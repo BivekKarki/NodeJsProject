@@ -1,10 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import connectDB from "./config/database.js"
 
 const port = process.env.PORT || 5000;
 const app = express();
 
 dotenv.config();
+
+connectDB();
 
 // app.get("/", (req, res)=>{
 //     res.send("<h1>Home Page</h1>");
