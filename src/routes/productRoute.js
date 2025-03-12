@@ -1,5 +1,10 @@
 import express from "express";
-import createProduct from "../controllers/productController.js";
+import {
+    createProduct, 
+    getAllProducts,
+    getProductById
+} from "../controllers/productController.js";
+
 
 const router = express.Router();
 
@@ -8,7 +13,7 @@ const router = express.Router();
  * Method: GET
  * Get all products
  */
-// router.get("/", getAllProducts);
+router.get("/", getAllProducts);
 
 // router.get("/categories", getCategories);
 
@@ -17,7 +22,7 @@ const router = express.Router();
  * Method: GET
  * Get product by id
  */
-// router.get("/:id", getProductById);
+router.get("/:id", getProductById);
 
 /**
  * URL: /api/products
