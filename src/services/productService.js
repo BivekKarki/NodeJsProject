@@ -12,13 +12,19 @@ const getProductById = async (id)=> {
 }
 
 const createProduct = async (data) =>{
+    console.log("Data from postman: ",data);
     return await Product.create(data);
-    // return result;
 };
+
+const updateProduct = async (id, data)=>{
+    return await Product.findByIdAndUpdate(id, data);
+}
+
 export default {
     createProduct, 
     getAllProducts,
     getProductById,
+    updateProduct
 };
 
 

@@ -1,5 +1,6 @@
-import { json } from "express";
+
 import productService from "../services/productService.js";
+
 
 const getAllProducts = async (req, res)=> {
     try {
@@ -36,8 +37,20 @@ const createProduct = async (req, res) =>{
     }
 }
 
+const updateProduct = async (req, res)=> {
+    const id = req.params.id;
+    try {
+       const data =  await productService.updateProduct(id, req.body);
+        res.send(data);
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
 export {
     createProduct, 
     getAllProducts,
-    getProductById
+    getProductById,
+    updateProduct
 };

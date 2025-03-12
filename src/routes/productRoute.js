@@ -2,7 +2,8 @@ import express from "express";
 import {
     createProduct, 
     getAllProducts,
-    getProductById
+    getProductById,
+    updateProduct
 } from "../controllers/productController.js";
 
 
@@ -36,7 +37,7 @@ router.post("/", createProduct);
  * Method: PUT
  * Update product
  */
-// router.put("/:id", updateProduct);
+router.put("/:id", updateProduct);
 
 /**
  * URL: /api/products/:id

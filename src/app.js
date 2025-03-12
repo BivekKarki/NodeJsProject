@@ -1,4 +1,5 @@
 import express from 'express';
+import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 import connectDB from "./config/database.js";
 import productRoutes from "./routes/productRoute.js";
@@ -11,6 +12,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 connectDB();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.get("/", (req, res)=>{
 //     res.send("<h1>Home Page</h1>");
@@ -46,7 +50,7 @@ app.get("/", (req, res)=>{
 
 app.use("/api/products", productRoutes);
 
-app.listen(port,()=>{
+app.listen(port, ()=>{
     console.log(`Server started at port ${port}...`)
 })
 
