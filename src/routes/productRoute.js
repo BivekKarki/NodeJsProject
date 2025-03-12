@@ -3,7 +3,8 @@ import {
     createProduct, 
     getAllProducts,
     getProductById,
-    updateProduct
+    updateProduct, 
+    deleteProduct
 } from "../controllers/productController.js";
 
 
@@ -44,6 +45,6 @@ router.put("/:id", updateProduct);
  * Method: DELETE
  * Delete product
  */
-// router.delete("/:id", deleteProduct);
+router.delete("/:id", deleteProduct);
 
 export default router;
