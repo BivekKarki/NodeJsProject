@@ -17,6 +17,10 @@ const router = express.Router();
  */
 router.get("/", getAllProducts);
 
+// router.post("/test", (req, res)=> {
+//     res.send("Checking router")
+// })
+
 // router.get("/categories", getCategories);
 
 /**

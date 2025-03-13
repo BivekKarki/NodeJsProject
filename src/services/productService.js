@@ -1,5 +1,8 @@
 import Product from "../models/Product.js";
 
+//Database related task in service 
+
+
 const getAllProducts = async ()=> {
     const products = await Product.find();
     return products;
