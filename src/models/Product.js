@@ -13,6 +13,7 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
+        min: 0,
     },
     createdAt: {
         type: Date,
@@ -21,7 +22,16 @@ const productSchema = new mongoose.Schema({
     rating: {
         type: Number,
         default: 5,
+        min: 0,
+        max: 5,
     },
+    description: {
+        type: String
+    },
+    imageUrls: {
+        type: [String],
+
+    }
 });
 
 const model = mongoose.model("Product", productSchema);
