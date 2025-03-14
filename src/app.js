@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 import connectDB from "./config/database.js";
 import productRoutes from "./routes/productRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 
 dotenv.config();
@@ -49,6 +50,7 @@ app.get("/", (req, res)=>{
 // })
 
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoute);
 
 app.listen(port, ()=>{
     console.log(`Server started at port ${port}...`)
