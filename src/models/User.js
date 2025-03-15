@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
-import { EMAIL_REGEX } from "../constants/regex.js";
+import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex.js";
 
 const userSchema = new mongoose.Schema({
     address: {
-        city:String,
-        country:String,
+        city:{
+            type: String,
+            required:true,
+        },
+        country:{
+            type: String,
+            default: "Nepal",
+        },
         province:String,
         street:String,
     },
@@ -16,6 +22,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        lowercase:true,
+        trim: true,
         validate: {
             validator: (value)=>{
                 return EMAIL_REGEX.test(value);
@@ -29,7 +37,15 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        minLength: 8,
+        validate: {
+            validator: (value)=>{
+                // if(!value) return true;
+                return PASSWORD_REGEX.test(value);
+            },
+            message: "Password must contain uppercase, lowercase, special character, number",
+        },
     },
     profileImageUrl: String,
     roles: {
