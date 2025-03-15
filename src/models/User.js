@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { EMAIL_REGEX } from "../constants/regex.js";
 
 const userSchema = new mongoose.Schema({
     address: {
@@ -14,7 +15,13 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: (value)=>{
+                return EMAIL_REGEX.test(value);
+            },
+            message: "Invalid email address",
+        },
     },
     phone: {
         type: String,
