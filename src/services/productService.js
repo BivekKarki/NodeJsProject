@@ -15,7 +15,7 @@ const getProductById = async (id)=> {
 }
 
 const createProduct = async (data) =>{
-    console.log("Data from postman: ",data);
+    // console.log("Data from postman: ",data);
     return await Product.create(data);
 };
 

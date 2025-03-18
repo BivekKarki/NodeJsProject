@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from "./config/database.js";
 import productRoutes from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
+import authRoute from "./routes/authRoute.js";
 import logger from './middlewares/logger.js';
 
 
@@ -54,6 +55,7 @@ app.get("/", (req, res)=>{
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoute);
+app.use("/api/auth/login", authRoute);
 
 app.listen(port, ()=>{
     console.log(`Server started at port ${port}...`)
