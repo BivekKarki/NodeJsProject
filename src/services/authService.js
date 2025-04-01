@@ -8,6 +8,15 @@ const login = async (data)=> {
     
     if(!user) throw new Error("User not found")
 
+    const isPasswordMatched = bcrypt.compareSync(data.password, user.password);    
+
+    if(!isPasswordMatched){
+        throw{
+            statusCode: 400,
+            message: "Incorrect Password"
+        }
+    }
+    
     return user;
 }
 
