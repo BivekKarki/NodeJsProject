@@ -55,7 +55,7 @@ app.get("/", (req, res)=>{
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoute);
-app.use("/api/auth/login", authRoute);
+app.use("/api/auth", authRoute);
 
 app.listen(port, ()=>{
     console.log(`Server started at port ${port}...`)
