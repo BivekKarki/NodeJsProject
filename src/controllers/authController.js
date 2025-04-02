@@ -25,8 +25,26 @@ const login = async (req, res)=> {
 
 const register = async (req, res)=> {
     try {
+
+        const {
+            address,
+            email, phone, 
+            password, 
+            name,
+            confirmPassword 
+        } = req.body;
+
+        if(!address?.city) return res.status(422).send("Address city is required");
+        if(!email) return res.status(422).send("Email is required.");
+        if(!phone) return res.status(422).send("Phone is required.");
+        if(!name) return res.status(422).send("Name is required.");
+        if(!password) return res.status(422).send("password is required.");
+        if(!confirmPassword) return res.status(422).send("Comfirm Password is required.");
+        if(password != confirmPassword)
+            return res.status(422).send("Password is not matched")
+
         const data = await authService.register(req.body);
-        console.log("Hellooooooooooo",data);
+        
         res.json(data);
     }catch (error) {
         res.status(500).send(error.message);
