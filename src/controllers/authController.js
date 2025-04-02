@@ -2,6 +2,17 @@ import authService from '../services/authService.js';
 
 const login = async (req, res)=> {
     try {
+
+        const {email, phone, password} = req.body;
+
+        if(!email && !phone)
+            return res.status(422).send("Email or phone is required.");
+       
+        if(!password)
+            return res.status(422).send("Password is required.");
+
+
+
         const data = await authService.login(req.body);
         res.cookie("userId", data._id);
         
