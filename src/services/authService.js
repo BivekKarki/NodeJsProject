@@ -3,12 +3,18 @@ import bcrypt from 'bcryptjs';
 
 const login = async (data)=> {
     const user = await User.findOne({
-        email: data.email,
+        email: data.email
+        // $or: [
+        //     {email: data.email},
+        //     {phone: data.phone}
+        // ],
     });
     
     if(!user) throw new Error("User not found")
 
     const isPasswordMatched = bcrypt.compareSync(data.password, user.password);    
+
+    console.log(data.email, data.password, user);
 
     if(!isPasswordMatched){
         throw{
@@ -16,7 +22,7 @@ const login = async (data)=> {
             message: "Incorrect Password"
         }
     }
-    
+
     return user;
 }
 
