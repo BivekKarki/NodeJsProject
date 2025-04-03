@@ -1,3 +1,5 @@
+import { PASSWORD_REGEX } from '../constants/regex.js';
+import { formatUserData } from '../helpers/dataFormatter.js';
 import authService from '../services/authService.js';
 
 const login = async (req, res)=> {
@@ -16,7 +18,7 @@ const login = async (req, res)=> {
         const data = await authService.login(req.body);
         res.cookie("userId", data._id);
         
-        res.json(data);
+        res.json(formatUserData(data));
     }catch (error) {
         res.status(500).send(error.message);
     }
@@ -43,11 +45,14 @@ const register = async (req, res)=> {
         if(password != confirmPassword)
             return res.status(422).send("Password is not matched")
 
+        if(!PASSWORD_REGEX.test(password))
+            return res.status(422).send("Invalid password: Password must contain uppercase lowercase character number")
+
         const data = await authService.register(req.body);
         
-        res.json(data);
+        res.json(formatUserData(data));
     }catch (error) {
-        res.status(500).send(error.message);
+        res.status(error.statusCode || 500).send(error.message);
     }
 } 
     

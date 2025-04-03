@@ -28,6 +28,22 @@ const login = async (data)=> {
 
 const register = async (data)=>{
 
+    const user = await User.findOne({
+        $or: [
+            {email: data.email},
+            {phone: data.phone}
+        ],
+    });
+
+    if(user) {
+        throw{
+            statusCode: 409,
+            message: "User already exists"
+        }
+    }
+        
+
+
     // const salt = await bcrypt.genSalt(10)
     // const hashedPassword = await bcrypt.hash(data.password, salt);
 
