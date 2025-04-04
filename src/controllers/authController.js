@@ -21,9 +21,9 @@ const login = async (req, res)=> {
         const formattedData = formatUserData(data);
 
         const token = createJWT(formattedData);
-        console.log("Token",token);
+        // console.log("Token",token);
 
-        res.cookie("userId", data._id);
+        res.cookie("authToken", token);
         
         res.json(formattedData);
     }catch (error) {
