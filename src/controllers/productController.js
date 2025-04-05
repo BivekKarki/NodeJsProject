@@ -30,8 +30,8 @@ const getProductById =async (req, res)=> {
 const createProduct = async (req, res) =>{
     try {
         const data = await productService.createProduct(req.body);
-
-        res.send(data);
+        // console.log("Product controller...", data);
+        res.json(data);  
     } catch (error) {
         res.status(500).send(error.message);
     }

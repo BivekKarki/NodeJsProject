@@ -20,7 +20,9 @@ const createProduct = async (data) =>{
 };
 
 const updateProduct = async (id, data)=>{
-    return await Product.findByIdAndUpdate(id, data);
+    return await Product.findByIdAndUpdate(id, data, {
+        new: true,
+    });
 }
 
 const deleteProduct = async (id)=> {
