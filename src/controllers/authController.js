@@ -57,6 +57,11 @@ const register = async (req, res)=> {
 
         const data = await authService.register(req.body);
         
+        const formattedData = formatUserData(data);
+
+        const token = createJWT(formattedData);
+        
+        res.cookie("authToken", token);
 
         res.json(formatUserData(data));
     }catch (error) {
