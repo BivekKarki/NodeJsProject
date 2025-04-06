@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../constants/regex.js";
+import { ROLE_ADMIN, ROLE_MERCHANT, ROLE_USER } from "../constants/roles.js";
 
 const userSchema = new mongoose.Schema({
     address: {
@@ -50,7 +51,8 @@ const userSchema = new mongoose.Schema({
     profileImageUrl: String,
     roles: {
         type: [String],
-        default: ["USER"]
+        default: [ROLE_USER],
+        enum: [ ROLE_ADMIN, ROLE_USER, ROLE_MERCHANT],
     } ,
     createdAt: {
         type: Date,

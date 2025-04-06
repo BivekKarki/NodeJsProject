@@ -7,6 +7,8 @@ import {
     deleteProduct
 } from "../controllers/productController.js";
 import auth from "../middlewares/auth.js";
+import roleBasedAuth from "../middlewares/roleBasedAuth.js";
+import { ROLE_ADMIN } from "../constants/roles.js";
 
 
 const router = express.Router();
@@ -50,6 +52,6 @@ router.put("/:id", auth, updateProduct);
  * Method: DELETE
  * Delete product
  */
-router.delete("/:id", deleteProduct);
+router.delete("/:id", auth, roleBasedAuth(ROLE_ADMIN), deleteProduct);
 
 export default router;
