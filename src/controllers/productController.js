@@ -33,9 +33,12 @@ const createProduct = async (req, res) =>{
         // console.log("Product controller...", data);
         res.json(data);  
     } catch (error) {
+        console.log("Hello error",error);
         res.status(500).send(error.message);
     }
 }
+
+  
 
 const updateProduct = async (req, res)=> {
     const id = req.params.id;

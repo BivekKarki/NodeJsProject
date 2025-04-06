@@ -18,7 +18,7 @@ const auth = (req, res, next)=>{
         res.status(400).send("Invalid token")
     });
     
-    // console.log("Middleware",authToken);
+    console.log("Middleware pass");
 
     next();
 }
