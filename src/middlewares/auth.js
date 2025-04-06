@@ -19,8 +19,7 @@ const auth = (req, res, next)=>{
     });
     
     console.log("Middleware pass");
-
-    next();
+    
 }
 
 export default auth;
