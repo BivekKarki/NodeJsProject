@@ -14,7 +14,7 @@ const login = async (data)=> {
 
     const isPasswordMatched = bcrypt.compareSync(data.password, user.password);    
 
-    console.log(data.email, data.password, user);
+    // console.log(data.email, data.password, user);
 
     if(!isPasswordMatched){
         throw{

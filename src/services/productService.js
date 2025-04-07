@@ -14,9 +14,9 @@ const getProductById = async (id)=> {
     return product;
 }
 
-const createProduct = async (data) =>{
+const createProduct = async (data, userId) =>{
     // console.log("Data from postman: ",data);
-    return await Product.create(data);
+    return await Product.create({...data, createdBy: userId});
 };
 
 const updateProduct = async (id, data)=>{
