@@ -1,4 +1,5 @@
 
+import { ROLE_ADMIN } from "../constants/roles.js";
 import productService from "../services/productService.js";
 
 
@@ -43,13 +44,13 @@ const createProduct = async (req, res) =>{
 
 const updateProduct = async (req, res)=> {
     const id = req.params.id;
-    const userId = req.user.id;
+    const user = req.user;
     try {
         const product = await productService.getProductById(id);
         
         if(!product) return res.status(404).send("Product not found!");
         
-        if(product.createdBy != userId) {
+        if(product.createdBy != user.id && !user.roles.includes(ROLE_ADMIN)) {
             return res.status(403).send("Access denied!");
         }
 
