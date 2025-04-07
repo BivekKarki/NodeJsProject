@@ -43,7 +43,16 @@ const createProduct = async (req, res) =>{
 
 const updateProduct = async (req, res)=> {
     const id = req.params.id;
+    const userId = req.user.id;
     try {
+        const product = await productService.getProductById(id);
+        
+        if(!product) return res.status(404).send("Product not found!");
+        
+        if(product.createdBy != userId) {
+            return res.status(403).send("Access denied!");
+        }
+
        const data =  await productService.updateProduct(id, req.body);
         res.send(data);
     } catch (error) {
