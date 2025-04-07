@@ -46,7 +46,6 @@ const updateProduct = async (req, res)=> {
     try {
        const data =  await productService.updateProduct(id, req.body);
         res.send(data);
-
     } catch (error) {
         res.status(500).send(error.message);
     }
