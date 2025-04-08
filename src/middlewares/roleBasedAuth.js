@@ -2,7 +2,7 @@ const roleBasedAuth = (role)=> {
     return (req, res, next)=>{
         const user = req.user;
 
-        console.log("User role is ... ",role, "/n send role is ... ", user.roles);
+        console.log("User role is ... ",role);
 
         // console.log(user);
         if(user.roles.includes(role)) return next();

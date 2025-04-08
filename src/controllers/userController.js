@@ -9,4 +9,16 @@ const createUser = async (req, res)=> {
     }
 }
 
-export { createUser };
+const createMerchant = async (req, res)=> {
+    try {
+        const merchant = await userService.createMerchant(req.body);
+        res.json(merchant);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+export { 
+    createUser, 
+    createMerchant 
+};
