@@ -8,7 +8,27 @@ const createUser = async (data)=> {
 };
 
 const createMerchant = async (data)=>{
-    await User.create({...data, roles:[ROLE_USER, ROLE_MERCHANT]});
+
+    const user = await User.findOne({
+        $or: [{ email: data.email }, { phone: data.phone }],
+      });
+    
+      if (user) {
+        throw {
+          statusCode: 409,
+          message: "User already exists.",
+        };
+      }
+      
+    const hashedPassword = bcrypt.hashSync(data.password);
+    
+    await User.create({
+        address: data.address,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        password: hashedPassword, 
+        roles:[ROLE_USER, ROLE_MERCHANT]});
 
 }
 
