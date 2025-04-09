@@ -14,7 +14,7 @@ const createMerchant = async (req, res)=> {
         const merchant = await userService.createMerchant(req.body);
         res.json(merchant);
     } catch (error) {
-        res.status(500).send(error.message);
+        res.status(error.status || 500).send(error.message);
     }
 }
 
