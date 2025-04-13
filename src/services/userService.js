@@ -13,12 +13,12 @@ const createMerchant = async (data)=>{
         $or: [{ email: data.email }, { phone: data.phone }],
       });
     
-      if (user) {
-        throw {
-          statusCode: 409,
-          message: "User already exists.",
-        };
-      }
+      // if (user) {
+      //   throw {
+      //     statusCode: 409,
+      //     message: "User already exists.",
+      //   };
+      // }
       
     const hashedPassword = bcrypt.hashSync(data.password);
     
