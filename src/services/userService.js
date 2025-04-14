@@ -32,4 +32,25 @@ const createMerchant = async (data)=>{
 
 }
 
-export default { createUser, createMerchant };
+const updateMerchant = async (id, data) => {
+  const hashedPassword = bcrypt.hashSync(data.password);
+
+  return await User.findByIdAndUpdate(
+    id, 
+    {
+    address: data.address,
+    name: data.name,
+    phone: data.phone,
+    password: hashedPassword,
+
+  },
+  {
+    new: true,
+  });
+}
+
+export default { 
+  createUser, 
+  createMerchant, 
+  updateMerchant 
+};
