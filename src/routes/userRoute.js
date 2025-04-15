@@ -1,5 +1,5 @@
 import express from "express";
-import { createMerchant, createUser, updateMerchant } from "../controllers/userController.js";
+import { createMerchant, createUser, updateUser } from "../controllers/userController.js";
 import auth from "../middlewares/auth.js";
 import roleBasedAuth from "../middlewares/roleBasedAuth.js";
 import { ROLE_ADMIN } from "../constants/roles.js";
@@ -11,8 +11,8 @@ router.post("/", createUser);
 // /api/users/merchant
 router.post("/merchant", auth, roleBasedAuth(ROLE_ADMIN), createMerchant);
 
-
-router.put("/merchant/:id", auth, roleBasedAuth(ROLE_ADMIN), updateMerchant);
+// /api/users/:id
+router.put("/:id", auth, roleBasedAuth(ROLE_ADMIN), updateUser);
 
 
 

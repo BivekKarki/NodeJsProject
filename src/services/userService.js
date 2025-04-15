@@ -32,7 +32,7 @@ const createMerchant = async (data)=>{
 
 }
 
-const updateMerchant = async (id, data) => {
+const updateUser = async (id, data) => {
   const updateData = {
     address: data.address,
     name: data.name,
@@ -51,5 +51,5 @@ const updateMerchant = async (id, data) => {
 export default { 
   createUser, 
   createMerchant, 
-  updateMerchant 
+  updateUser 
 };
