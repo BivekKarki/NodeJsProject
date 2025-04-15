@@ -1,3 +1,4 @@
+import { formatUserData } from "../helpers/dataFormatter.js";
 import userService from "../services/userService.js"
 
 const createUser = async (req, res)=> {
@@ -44,7 +45,10 @@ const deleteUser = async (req, res) => {
 const getAllUsers = async (req, res)=> {
     try {
         const users = await userService.getAllUsers();
-        res.json(users);
+        
+        const formattedUsers = users.map(user=>formatUserData(user))
+        
+        res.json(formattedUsers);
     } catch (error) {
         res.status(500).send(error.message);
         
