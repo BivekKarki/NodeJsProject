@@ -28,8 +28,49 @@ const updateUser = async (req, res)=> {
     }
 }
 
+const deleteUser = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        await userService.deleteUser(id);
+        res.send(`User deleted successfully of id: ${id}`)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+
+}
+
+
+const getAllUsers = async (req, res)=> {
+    try {
+        const users = await userService.getAllUsers();
+        res.json(users);
+    } catch (error) {
+        res.status(500).send(error.message);
+        
+    }
+}
+
+const getUserById =async (req, res)=> {
+    try {
+        const id = req.params.id;
+
+        const user = await userService.getUserById(id);
+        
+        if(!user) return res.status(404).send("User not found!");
+        res.json(user);
+
+    } catch (error) {
+        res.status(500).send(error.message);
+        
+    }
+}
+
 export { 
     createUser, 
     createMerchant,
-    updateUser 
+    updateUser,
+    deleteUser,
+    getAllUsers,
+    getUserById
 };
