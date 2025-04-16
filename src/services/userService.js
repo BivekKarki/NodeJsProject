@@ -64,11 +64,21 @@ const getUserById = async (id)=> {
   return user;
 }
 
+const getAllCustomers = async ()=> {
+  const users = await User.find({
+    roles: [ROLE_USER],
+  });
+  return users;
+}
+
+
+
 export default { 
   createUser, 
   createMerchant, 
   updateUser,
   deleteUser,
   getAllUsers,
-  getUserById
+  getUserById,
+  getAllCustomers
 };

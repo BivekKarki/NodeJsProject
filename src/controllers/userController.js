@@ -1,3 +1,4 @@
+import { ROLE_MERCHANT, ROLE_USER } from "../constants/roles.js";
 import { formatUserData } from "../helpers/dataFormatter.js";
 import userService from "../services/userService.js"
 
@@ -55,13 +56,31 @@ const getAllUsers = async (req, res)=> {
     }
 }
 
-const getUserById =async (req, res)=> {
+const getAllCustomers = async (req, res)=> {
     try {
-        const id = req.params.id;
+        const users = await userService.getAllCustomers();
+        
+        const formattedUsers = users.map(user=>formatUserData(user))
+        
+        res.json(formattedUsers);
+    } catch (error) {
+        res.status(500).send(error.message);
+        
+    }
+}
 
+const getUserById =async (req, res)=> {
+    const id = req.params.id;
+    const loggenInUser = req.user;
+    try {
         const user = await userService.getUserById(id);
         
         if(!user) return res.status(404).send("User not found!");
+       
+        if(loggenInUser.id != user.id && !user.roles.includes(ROLE_MERCHANT)) {
+            return res.status(403).send("Access denied!");
+        }
+
         res.json(user);
 
     } catch (error) {
@@ -76,5 +95,6 @@ export {
     updateUser,
     deleteUser,
     getAllUsers,
-    getUserById
+    getUserById,
+    getAllCustomers
 };
