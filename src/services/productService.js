@@ -2,9 +2,11 @@ import Product from "../models/Product.js";
 
 //Database related task in service 
 
+// 1. Sort Product: {fieldName: Order} e.g. {price:} 1: ASC | -1: DESC
+
 
 const getAllProducts = async ()=> {
-    const products = await Product.find();
+    const products = await Product.find().sort({createdAt: -1});
     return products;
 }
 
