@@ -5,8 +5,10 @@ import Product from "../models/Product.js";
 // 1. Sort Product: {fieldName: Order} e.g. {price:} 1: ASC | -1: DESC
 
 
-const getAllProducts = async ()=> {
-    const products = await Product.find().sort({createdAt: -1});
+const getAllProducts = async (query)=> {
+    console.log(query);
+    const sortQuery = JSON.parse(query.sort || "{}")
+    const products = await Product.find().sort(sortQuery);
     return products;
 }
 
