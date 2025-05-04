@@ -3,12 +3,12 @@ import Product from "../models/Product.js";
 //Database related task in service 
 
 // 1. Sort Product: {fieldName: Order} e.g. {price:} 1: ASC | -1: DESC
-
+// 2. Limit: Max no. of items
 
 const getAllProducts = async (query)=> {
     console.log(query);
     const sortQuery = JSON.parse(query.sort || "{}")
-    const products = await Product.find().sort(sortQuery);
+    const products = await Product.find().sort(sortQuery).limit(2);
     return products;
 }
 
