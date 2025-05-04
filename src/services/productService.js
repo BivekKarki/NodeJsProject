@@ -8,7 +8,9 @@ import Product from "../models/Product.js";
 const getAllProducts = async (query)=> {
     console.log(query);
     const sortQuery = JSON.parse(query.sort || "{}")
-    const products = await Product.find().sort(sortQuery).limit(2);
+    const limitQuery = query.limit;
+
+    const products = await Product.find().sort(sortQuery).limit(limitQuery);
     return products;
 }
 
