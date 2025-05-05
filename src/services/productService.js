@@ -12,7 +12,7 @@ const getAllProducts = async (query)=> {
     const offsetQuery = query.offset;
 
     const filters = {};
-    const { category, brands} = query;
+    const { category, brands, name} = query;  // yo destructured items vaneko chai uta postman bata rakheko keys haru ho
 
     if (category) filters.category = category;
     if (brands) {
@@ -21,6 +21,14 @@ const getAllProducts = async (query)=> {
             $in: brandItems,
         };
     }
+    if(name){
+        filters.name = {
+            $regex:name, 
+            $options: "i"
+        }
+    }
+
+    // yo filters.item vaneko item haru chai model ko item ho
 
     // const products = await Product.find({
         //     category: {
