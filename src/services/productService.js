@@ -9,8 +9,30 @@ const getAllProducts = async (query)=> {
     console.log(query);
     const sortQuery = JSON.parse(query.sort || "{}")
     const limitQuery = query.limit;
+    const offsetQuery = query.offset;
 
-    const products = await Product.find().sort(sortQuery).limit(limitQuery);
+    const filters = {};
+    const { category, brands} = query;
+
+    if (category) filters.category = category;
+    if (brands) {
+        const brandItems = brands.split(",")
+        filters.brand = {
+            $in: brandItems,
+        };
+    }
+
+    // const products = await Product.find({
+        //     category: {
+            //         $regex: category,
+            //         $options: "i",
+            //     },
+            // })
+    const products = await Product.find(filters)
+    .sort(sortQuery)
+    .limit(limitQuery)
+    .skip(offsetQuery);
+
     return products;
 }
 
