@@ -12,7 +12,7 @@ const getAllProducts = async (query)=> {
     const offsetQuery = query.offset;
 
     const filters = {};
-    const { category, brands, name} = query;  // yo destructured items vaneko chai uta postman bata rakheko keys haru ho
+    const { category, brands, name, min, max} = query;  // yo destructured items vaneko chai uta postman bata rakheko keys haru ho
 
     if (category) filters.category = category;
     if (brands) {
@@ -27,6 +27,17 @@ const getAllProducts = async (query)=> {
             $options: "i"
         }
     }
+
+    if(min) filters.price = {
+        $gte: parseFloat(min)
+    }
+
+    if(max) filters.price = {
+        ...filters.price,
+        $lte: parseFloat(max)
+    }
+
+    //for e.g. filters.brand = ["Apple", "Samsung"]
 
     // yo filters.item vaneko item haru chai model ko item ho
 
