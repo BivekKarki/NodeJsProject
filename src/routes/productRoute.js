@@ -4,7 +4,8 @@ import {
     getAllProducts,
     getProductById,
     updateProduct, 
-    deleteProduct
+    deleteProduct,
+    getProductsByUserId
 } from "../controllers/productController.js";
 import auth from "../middlewares/auth.js";
 import roleBasedAuth from "../middlewares/roleBasedAuth.js";
@@ -19,6 +20,8 @@ const router = express.Router();
  * Get all products
  */
 router.get("/", getAllProducts);
+
+router.get("/users", auth, getProductsByUserId);
 
 // router.post("/test", (req, res)=> {
 //     res.send("Checking router")

@@ -5,7 +5,7 @@ import Product from "../models/Product.js";
 // 1. Sort Product: {fieldName: Order} e.g. {price:} 1: ASC | -1: DESC
 // 2. Limit: Max no. of items
 
-const getAllProducts = async (query)=> {
+const getAllProducts = async (query, userId)=> {
     console.log(query);
     const sortQuery = JSON.parse(query.sort || "{}")
     const limitQuery = query.limit;
@@ -36,6 +36,8 @@ const getAllProducts = async (query)=> {
         ...filters.price,
         $lte: parseFloat(max)
     }
+
+    if(userId) filters.createdBy = userId;
 
     //for e.g. filters.brand = ["Apple", "Samsung"]
 

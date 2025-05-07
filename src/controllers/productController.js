@@ -13,6 +13,16 @@ const getAllProducts = async (req, res)=> {
     }
 }
 
+const getProductsByUserId = async ()=>{
+    try {
+        const products = await productService.getAllProducts(req.query, req.user.id);
+        res.json(products);
+    } catch (error) {
+        res.status(500).send(error.message);
+        
+    }
+}
+
 const getProductById =async (req, res)=> {
     try {
         const id = req.params.id;
@@ -85,5 +95,6 @@ export {
     getAllProducts,
     getProductById,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getProductsByUserId
 };
