@@ -68,5 +68,11 @@ const register = async (req, res)=> {
         res.status(error.statusCode || 500).send(error.message);
     }
 } 
+
+const logout = (req, res)=>{
+    res.clearCookie("authToken");
+
+    res.json({message: "Logout Successful."});
+}
     
-export { login, register };
+export { login, register, logout };
