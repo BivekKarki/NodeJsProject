@@ -74,5 +74,28 @@ const logout = (req, res)=>{
 
     res.json({message: "Logout Successful."});
 }
+
+/**
+ * 1. User forgot password
+ * 2. User request for reset password in email
+ * 3. User gets email
+ * Email has reset psw link
+ * 
+ */
+
+
+const forgotPassword = (req, res)=> {
+    res.send("Forgot Password");
+}
+
+/**
+ * 
+ * reset-password?token=<some-token-secret> 
+ *  
+ */
+
+const resetPassword = (req, res)=> {
+    res.send("Reset Password");
+}
     
-export { login, register, logout };
+export { login, register, logout, forgotPassword, resetPassword };
