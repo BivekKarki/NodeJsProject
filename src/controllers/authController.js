@@ -84,8 +84,11 @@ const logout = (req, res)=>{
  */
 
 
-const forgotPassword = (req, res)=> {
-    res.send("Forgot Password");
+const forgotPassword = async (req, res)=> {
+    const email = req.body.email;
+    if(!email) return res.status(422).send("Email is required.")
+    const data = await authService.forgotPassword(req.body.email)
+    res.json(data);
 }
 
 /**
