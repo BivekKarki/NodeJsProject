@@ -79,4 +79,37 @@ const forgotPassword = async (email)=> {
 
 }
 
-export default {login, register, forgotPassword};
+
+const resetPassword = async (userId, token, password)=> {
+    const data = await ResetPassword.findOne({
+        userId,
+        expiresAt: { $gt: Date.now() },
+
+    })
+    if(!data || data.token !== token){
+        throw{
+            statusCode:400,
+            message: "Invalid token.",
+        }
+    }
+
+    if(data.isUsed){
+        throw {
+            statusCode:400,
+            message: "Token already used."
+        }
+    }
+
+    const hashedPassword = bcrypt.hashSync(password);
+    await User.findByIdAndUpdate(userId, {
+        password: hashedPassword,
+    });
+
+    await ResetPassword.findByIdAndUpdate(data._id, {
+        isUsed: true,
+    })
+
+    return {message: "Password reset syccessfully."}
+}
+
+export default {login, register, forgotPassword, resetPassword};
