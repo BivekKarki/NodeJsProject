@@ -80,12 +80,19 @@ const forgotPassword = async (email)=> {
 }
 
 
-const resetPassword = async (userId, token, password)=> {
+const resetPassword = async (userId, token, password) => {
     const data = await ResetPassword.findOne({
         userId,
         expiresAt: { $gt: Date.now() },
 
-    })
+    });
+
+    // const datas = await ResetPassword.findOne({ userId, expiresAt: { $gt: Date.now() }, });
+    // console.log('Step 1 - Match by userId:', datas);
+
+    console.log(userId, token, password, data);
+    
+    
     if(!data || data.token !== token){
         throw{
             statusCode:400,

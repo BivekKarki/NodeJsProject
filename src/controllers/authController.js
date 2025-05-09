@@ -100,7 +100,9 @@ const forgotPassword = async (req, res)=> {
 const resetPassword = async (req, res)=> {
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
-    const token = res.query.token;
+  
+    const token = req.query.token;
+    // console.log("Tokennnnnnnnnnnnnnnnnnnn",token)
     const userId = req.params.userId;
 
     if(!password) return res.status(422).send("password is required.");
@@ -117,9 +119,6 @@ const resetPassword = async (req, res)=> {
     } catch (error) {
         res.status(error.statusCode || 500).send(error.message);
     }
-
-
-    res.send("Reset Password");
 }
     
 export { login, register, logout, forgotPassword, resetPassword };
