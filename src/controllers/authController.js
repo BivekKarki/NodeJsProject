@@ -97,7 +97,28 @@ const forgotPassword = async (req, res)=> {
  *  
  */
 
-const resetPassword = (req, res)=> {
+const resetPassword = async (req, res)=> {
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+    const token = res.query.token;
+    const userId = req.params.userId;
+
+    if(!password) return res.status(422).send("password is required.");
+    if(!confirmPassword) return res.status(422).send("Comfirm Password is required.");
+    if(password != confirmPassword)
+        return res.status(422).send("Password is not matched")
+
+    if(!PASSWORD_REGEX.test(password))
+        return res.status(422).send("Invalid password: Password must contain uppercase lowercase character number")
+
+    try {
+        const data = await authService.resetPassword(userId, token, password);
+        res.json(data);
+    } catch (error) {
+        res.status(error.statusCode || 500).send(error.message);
+    }
+
+
     res.send("Reset Password");
 }
     
