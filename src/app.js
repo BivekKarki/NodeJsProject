@@ -6,6 +6,7 @@ import productRoutes from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
 import logger from './middlewares/logger.js';
+import connectToCloudinary from './config/cloudinary.js';
 
 
 dotenv.config();
@@ -15,6 +16,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 connectDB();
+connectToCloudinary();
 
 app.use(logger);
 
