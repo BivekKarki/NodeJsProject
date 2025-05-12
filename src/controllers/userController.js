@@ -89,6 +89,10 @@ const getUserById =async (req, res)=> {
     }
 }
 
+const uploadProfileImage = (req, res)=> {
+    const data = userService.uploadProfileImage();
+    res.send("Upload Profile Image")
+}
 export { 
     createUser, 
     createMerchant,
@@ -96,5 +100,6 @@ export {
     deleteUser,
     getAllUsers,
     getUserById,
-    getAllCustomers
+    getAllCustomers,
+    uploadProfileImage
 };

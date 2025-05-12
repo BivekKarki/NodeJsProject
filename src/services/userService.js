@@ -71,7 +71,9 @@ const getAllCustomers = async ()=> {
   return users;
 }
 
-
+const uploadProfileImage = ()=> {
+  console.log("Upload profile image")
+}
 
 export default { 
   createUser, 
@@ -80,5 +82,6 @@ export default {
   deleteUser,
   getAllUsers,
   getUserById,
-  getAllCustomers
+  getAllCustomers,
+  uploadProfileImage
 };
