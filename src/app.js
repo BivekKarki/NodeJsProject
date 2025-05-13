@@ -7,6 +7,7 @@ import userRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
 import logger from './middlewares/logger.js';
 import connectToCloudinary from './config/cloudinary.js';
+import multer from 'multer';
 
 
 dotenv.config();
@@ -17,6 +18,8 @@ const port = process.env.PORT || 5000;
 
 connectDB();
 connectToCloudinary();
+
+const upload = multer()
 
 app.use(logger);
 
@@ -56,7 +59,7 @@ app.get("/", (req, res)=>{
 // })
 
 app.use("/api/products", productRoutes);
-app.use("/api/users", userRoute);
+app.use("/api/users", upload.single("image"), userRoute);
 app.use("/api/auth", authRoute);
 
 app.listen(port, ()=>{

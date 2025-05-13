@@ -90,6 +90,8 @@ const getUserById =async (req, res)=> {
 }
 
 const uploadProfileImage = (req, res)=> {
+    const file = req.file;
+    console.log(file);
     const data = userService.uploadProfileImage();
     res.send("Upload Profile Image")
 }
