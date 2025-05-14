@@ -19,7 +19,10 @@ const port = process.env.PORT || 5000;
 connectDB();
 connectToCloudinary();
 
-const upload = multer()
+const upload = multer({
+    // dest: "uploads/",
+    storage: multer.memoryStorage(),
+})
 
 app.use(logger);
 

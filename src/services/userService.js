@@ -1,5 +1,7 @@
 import { ROLE_MERCHANT, ROLE_USER } from "../constants/roles.js";
 import User from "../models/User.js"
+import { v2 as cloudinary } from 'cloudinary';
+import { Readable } from 'stream'
 
 const createUser = async (data)=> {
     const user = await User.create(data);
@@ -71,8 +73,15 @@ const getAllCustomers = async ()=> {
   return users;
 }
 
-const uploadProfileImage = ()=> {
-  console.log("Upload profile image")
+const uploadProfileImage = async (file)=> {
+  cloudinary.uploader
+  .upload_stream({
+      folder: "Nodejs2025",
+    }, (error, data)=>{
+      if(error) return console.log(error);
+      console.log(data);
+    })
+    .end(file.buffer);
 }
 
 export default { 
