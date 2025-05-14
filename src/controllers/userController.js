@@ -91,9 +91,15 @@ const getUserById =async (req, res)=> {
 
 const uploadProfileImage = async (req, res)=> {
     const file = req.file;
-    console.log(file);
-    const data = await userService.uploadProfileImage(file);
-    res.send("File uploaded successfully")
+    try {
+        const data = await userService.uploadProfileImage(file);
+        res.json(data);
+        // res.send("File uploaded successfully")
+        
+    } catch (error) {
+        res.status(500).send(error.message);
+        console.log(error)
+    }
 }
 export { 
     createUser, 
