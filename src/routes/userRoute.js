@@ -25,7 +25,7 @@ router.get("/customers", auth, roleBasedAuth(ROLE_MERCHANT), getAllCustomers);
 // /api/users/:id
 router.get("/:id",auth, roleBasedAuth(ROLE_MERCHANT), getUserById);
 
-router.put("/:id/upload",auth, uploadProfileImage);
+router.put("/profile/upload",auth, uploadProfileImage);
 
 
 export default router

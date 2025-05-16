@@ -72,8 +72,19 @@ const getAllCustomers = async ()=> {
   return users;
 }
 
-const uploadProfileImage = async (file)=> {
-  return await uploadFile(file);
+const uploadProfileImage = async (userId, file)=> {
+  const uploadedFile = await uploadFile(file);
+
+  return await User.findByIdAndUpdate(userId, {
+    profileImageUrl: uploadedFile?.url,
+  },
+  {
+    new: true
+  }
+);
+
+return 
+
 }
 
 export default { 
