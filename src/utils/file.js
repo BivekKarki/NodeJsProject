@@ -16,8 +16,8 @@ const uploadFile = async (files)=> {
                 })
                 .end(file.buffer);
 
+            })
             uploadResults.push(result);
-        })
 
     }
     return uploadResults;
