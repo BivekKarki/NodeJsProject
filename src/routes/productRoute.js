@@ -42,7 +42,9 @@ router.get("/:id", getProductById);
  * Create product
  */
 router.post("/", auth, roleBasedAuth(ROLE_MERCHANT), createProduct);
-
+// router.post("/", (req, res) => {
+//     console.log("Heloooo",req.file); // works because `upload.single("image")` ran in app.js
+// });
 /**
  * URL: /api/products/:id
  * Method: PUT

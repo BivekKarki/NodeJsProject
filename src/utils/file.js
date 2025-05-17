@@ -3,6 +3,7 @@ import { v2 as cloudinary } from 'cloudinary';
 const CLOUDINARY_FOLDER = "Nodejs2025";
 
 const uploadFile = async (file)=> {
+    // console.log("File upload function")
     return await new Promise((resolve, reject)=>{
         cloudinary.uploader
         .upload_stream({

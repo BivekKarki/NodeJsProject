@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import uploadFile from "../utils/file.js";
 
 //Database related task in service 
 
@@ -63,9 +64,14 @@ const getProductById = async (id)=> {
     return product;
 }
 
-const createProduct = async (data, userId) =>{
-    // console.log("Data from postman: ",data);
-    return await Product.create({...data, createdBy: userId});
+const createProduct = async (data, file, userId) =>{
+    const uploadedfile = await uploadFile(file);
+    console.log("Data from postman: ",data, file);
+    return await Product.create({
+        ...data, 
+        createdBy: userId,
+        imageUrls: [uploadedfile?.url],
+    });
 };
 
 const updateProduct = async (id, data)=>{
