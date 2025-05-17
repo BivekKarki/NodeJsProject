@@ -40,13 +40,13 @@ const getProductById =async (req, res)=> {
 
 const createProduct = async (req, res) =>{
     const userId = req.user.id;
-    const file = req.file;
+    const files = req.files;
     const input = req.body;
 
-      if (!file) return res.status(400).json({ error: "No file uploaded" });
-
+      if (!files) return res.status(400).json({ error: "No file uploaded" });
+    // console.log(files);
     try {
-        const data = await productService.createProduct(input, file, userId);
+        const data = await productService.createProduct(input, files, userId);
         // console.log("Product controller...", data);
         res.json(data);  
     } catch (error) {

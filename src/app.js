@@ -61,7 +61,7 @@ app.get("/", (req, res)=>{
 //     res.send(`<h1>Product by id: ${id}</h1>`);
 // })
 
-app.use("/api/products", upload.single("image"), productRoutes);
+app.use("/api/products", upload.array("images", 5), productRoutes);
 app.use("/api/users", upload.single("image"), userRoute);
 app.use("/api/auth", authRoute);
 

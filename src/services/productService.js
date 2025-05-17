@@ -64,9 +64,9 @@ const getProductById = async (id)=> {
     return product;
 }
 
-const createProduct = async (data, file, userId) =>{
-    const uploadedfile = await uploadFile(file);
-    console.log("Data from postman: ",data, file);
+const createProduct = async (data, files, userId) =>{
+    const uploadedfile = await uploadFile(files);
+    console.log("Data from postman: ",data, files);
     return await Product.create({
         ...data, 
         createdBy: userId,
