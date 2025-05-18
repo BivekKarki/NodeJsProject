@@ -74,9 +74,15 @@ const createProduct = async (data, files, userId) =>{
     });
 };
 
-const updateProduct = async (id, data)=>{
-    return await Product.findByIdAndUpdate(id, data, {
-        new: true,
+const updateProduct = async (id, data, files)=>{
+
+    const uploadedfiles = await uploadFile(files);
+    
+    return await Product.findByIdAndUpdate(
+        id, {
+        ...data, 
+        imageUrls: uploadedfiles.map(item=>item?.url),
+        },{new: true,
     });
 }
 
