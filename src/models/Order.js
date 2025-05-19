@@ -5,7 +5,7 @@ new mongoose.Schema({
         type: String,
         required: true,
     },
-    userId: {
+    user: {
         type: mongoose.Types.ObjectId,
         ref: "User",
         required: true,
@@ -33,6 +33,10 @@ new mongoose.Schema({
         type: String,
         required: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now(),
+    }
 
 });
 
