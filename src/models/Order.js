@@ -1,6 +1,6 @@
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 
-new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     orderId: {
         type: String,
         required: true,
@@ -40,6 +40,9 @@ new mongoose.Schema({
 
 });
 
+const model = mongoose.model("Order", orderSchema)
+
+export default model;
 /**
  * OrderNumber: 
  * UserIs: FK
