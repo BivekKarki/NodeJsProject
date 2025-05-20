@@ -5,6 +5,7 @@ import connectDB from "./config/database.js";
 import productRoutes from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
+import orderRoute from "./routes/orderRoute.js";
 import logger from './middlewares/logger.js';
 import connectToCloudinary from './config/cloudinary.js';
 import multer from 'multer';
@@ -64,6 +65,8 @@ app.get("/", (req, res)=>{
 app.use("/api/products", upload.array("images", 5), productRoutes);
 app.use("/api/users", upload.single("image"), userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/orders", orderRoute);
+
 
 app.listen(port, ()=>{
     console.log(`Server started at port ${port}...`)
