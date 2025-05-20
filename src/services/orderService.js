@@ -4,4 +4,8 @@ const getAllOrders = async ()=> {
    return await Order.find();
 }
 
-export default { getAllOrders };
+const createOrder = async (data)=> {
+   return await Order.create(data);
+}
+
+export default { getAllOrders, createOrder };
