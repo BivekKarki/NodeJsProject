@@ -1,8 +1,13 @@
+import { ORDER_STATUS_PENDING } from '../constants/orderStatus.js';
 import { ROLE_ADMIN } from '../constants/roles.js';
 import Order from '../models/Order.js';
 
-const getAllOrders = async ()=> {
+const getAllOrders = async (query)=> {
+   const filter = {}
+   if(filter.status) filter.status = query.status || ORDER_STATUS_PENDING;
+
    return await Order.find()
+   .sort(JSON.stringify({ createdAt: -1 }))
    .populate("orderItems.product") //to get all the details of product as it is referred in models
    .populate("user", ["name", "email", "phone", "address"]);
 }
@@ -24,10 +29,6 @@ const getOrderById = async (id)=> {
          message: "Order not found",
       };
    }
-
-   // if(order.user.roles.includes(ROLE_ADMIN)){
-   //    if
-   // }
 
    return order;
 
