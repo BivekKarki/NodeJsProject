@@ -9,16 +9,18 @@ const createOrder = async (req, res)=>{
     const input = req.body;
     const user = req.user
 
+    console.log("INput..........",input.orderItems[0]);
+
     if(!input.orderNumber){
         return res.status(422).send("Order number is required.")
     }
 
-    if(!input.orderItems || !input.orderItems?.length == 0){
+    if(!input.orderItems || input.orderItems?.length == 0){
         return res.status(422).send("Order items are required.")  
     }
 
     if(!input.orderItems[0]?.product){
-        return res.status(422).send("Product is required.")
+        return res.status(422).send("Order's product is required.")
     }
 
     if(!input.totalPrice){
@@ -37,6 +39,7 @@ const createOrder = async (req, res)=>{
     }
 
     try {
+        
         const order = await orderService.createOrder(input);
         res.json(order);
     } catch (error) {

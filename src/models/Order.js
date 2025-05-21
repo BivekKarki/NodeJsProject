@@ -30,8 +30,16 @@ const orderSchema = new mongoose.Schema({
         enum: ["pending", "confirmed", "shipped", "delivered" ],
     },
     shippingAddress: {
-        type: String,
-        required: true,
+        city:{
+            type: String,
+            required:true,
+        },
+        country:{
+            type: String,
+            default: "Nepal",
+        },
+        province:String,
+        street:String,
     },
     createdAt: {
         type: Date,
