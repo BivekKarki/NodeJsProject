@@ -55,4 +55,17 @@ const getOrdersByUser = async (req, res)=> {
     res.json(orders);
 }
 
-export { getAllOrders, createOrder, getOrdersByUser };
+const getOrderById = async (req, res)=> {
+    const id = req.params.id;
+
+    const orders = await orderService.getOrderById(id, user.id);
+
+    res.json(orders);
+}
+
+export { 
+    getAllOrders, 
+    createOrder, 
+    getOrdersByUser, 
+    getOrderById 
+};
