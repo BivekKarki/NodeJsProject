@@ -48,4 +48,11 @@ const createOrder = async (req, res)=>{
 
 }
 
-export { getAllOrders, createOrder };
+const getOrdersByUser = async (req, res)=> {
+    const user = req.user;
+    const orders = await orderService.getOrdersByUser(user.id);
+
+    res.json(orders);
+}
+
+export { getAllOrders, createOrder, getOrdersByUser };
