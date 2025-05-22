@@ -40,6 +40,7 @@ const getOrderById = async (id)=> {
    }
 
 const createOrder = async (data)=> {
+   data.orderNumber = crypto.randomUUID();
    return await Order.create(data);
 }
 
