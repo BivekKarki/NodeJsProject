@@ -60,9 +60,28 @@ const getOrderById = async (req, res)=> {
     const id = req.params.id;
 
     try {
-        const orders = await orderService.getOrderById(id);
+        const order = await orderService.getOrderById(id);
     
-        res.json(orders);
+        res.json(order);
+        
+    } catch (error) {
+        res.status(error.statusCode || 500).send(error.message);
+    }
+}
+
+const updateOrderStatus = async (req, res)=> {
+    const id = req.params.id;
+    const input = req.body;
+    // console.log(id)
+    
+    try {
+        await orderService.getOrderById(id);
+        if(!input.status)
+            return res.status(422).send("Order status is required.")
+        
+        const order = await orderService.updateOrderStatus(id, input.status);
+    
+        res.json(order);
         
     } catch (error) {
         res.status(error.statusCode || 500).send(error.message);
@@ -73,5 +92,6 @@ export {
     getAllOrders, 
     createOrder, 
     getOrdersByUser, 
-    getOrderById 
+    getOrderById,
+    updateOrderStatus 
 };

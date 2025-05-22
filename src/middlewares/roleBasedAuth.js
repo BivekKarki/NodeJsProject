@@ -4,7 +4,7 @@ const roleBasedAuth = (role)=> {
 
         console.log("User role is ... ",role);
 
-        // console.log(user);
+        console.log(user);
         if(user.roles.includes(role)) return next();
 
         res.status(403).send("Access denied.");

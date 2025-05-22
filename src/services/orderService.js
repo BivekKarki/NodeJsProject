@@ -3,17 +3,22 @@ import { ROLE_ADMIN } from '../constants/roles.js';
 import Order from '../models/Order.js';
 
 const getAllOrders = async (query)=> {
-   const filter = {}
-   if(filter.status) filter.status = query.status || ORDER_STATUS_PENDING;
+   // const filter = {}
+   // if(filter.status) filter.status = query.status || ORDER_STATUS_PENDING;
 
-   return await Order.find()
+   return await Order.find({
+      status: query.status || ORDER_STATUS_PENDING
+   })
    .sort(JSON.stringify({ createdAt: -1 }))
    .populate("orderItems.product") //to get all the details of product as it is referred in models
    .populate("user", ["name", "email", "phone", "address"]);
 }
 
 const getOrdersByUser = async (userId)=> {
-   return await Order.find({user: userId})
+   return await Order.find({
+      user: userId,
+      ststus: query.status || ORDER_STATUS_PENDING,
+   })
    .populate("orderItems.product") //to get all the details of product as it is referred in models
    .populate("user", ["name", "email", "phone", "address"]);
 }
@@ -38,9 +43,21 @@ const createOrder = async (data)=> {
    return await Order.create(data);
 }
 
+const updateOrderStatus = async (id, status)=> {
+  
+   return await Order.findByIdAndUpdate(
+      id, 
+      {
+         status,
+      },
+      { new: true }
+   )
+}
+
 export default { 
    getAllOrders, 
    createOrder, 
    getOrdersByUser, 
-   getOrderById 
+   getOrderById,
+   updateOrderStatus
 };
