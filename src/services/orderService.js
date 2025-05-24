@@ -44,6 +44,22 @@ const createOrder = async (data)=> {
    return await Order.create(data);
 }
 
+//Initiate payments
+const checkOutOrder = async (id, data)=> {
+   const order = await Order.findById(id)
+      
+   if(!order){
+      throw{
+         statusCode: 404,
+         message: "Order not found",
+      };
+   }
+
+  // initiate khalti payment
+  
+
+}
+
 const updateOrderStatus = async (id, status)=> {
   
    return await Order.findByIdAndUpdate(
