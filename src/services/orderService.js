@@ -1,6 +1,7 @@
 import { ORDER_STATUS_PENDING } from '../constants/orderStatus.js';
 import { ROLE_ADMIN } from '../constants/roles.js';
 import Order from '../models/Order.js';
+import payViaKhalti from '../utils/khalti.js';
 
 const getAllOrders = async (query)=> {
    // const filter = {}
@@ -14,10 +15,11 @@ const getAllOrders = async (query)=> {
    .populate("user", ["name", "email", "phone", "address"]);
 }
 
-const getOrdersByUser = async (userId)=> {
+const getOrdersByUser = async (query, userId)=> {
+   
    return await Order.find({
       user: userId,
-      ststus: query.status || ORDER_STATUS_PENDING,
+      status: query?.status || ORDER_STATUS_PENDING,
    })
    .populate("orderItems.product") //to get all the details of product as it is referred in models
    .populate("user", ["name", "email", "phone", "address"]);
@@ -46,7 +48,7 @@ const createOrder = async (data)=> {
 
 //Initiate payments
 const checkOutOrder = async (id, data)=> {
-   const order = await Order.findById(id)
+   const order = await Order.findById(id).populate("user", ["name", "email", "phone"]);
       
    if(!order){
       throw{
@@ -56,6 +58,14 @@ const checkOutOrder = async (id, data)=> {
    }
 
   // initiate khalti payment
+  return await payViaKhalti({
+     returnUrl: data.returnUrl,
+     websiteUrl: data.websiteUrl,
+     amount: order.totalPrice,
+     orderId: order.id,
+     orderName: order.orderNumber,
+     customerInfo: order.user,
+  })
   
 
 }
@@ -81,5 +91,6 @@ export default {
    getOrdersByUser, 
    getOrderById,
    updateOrderStatus,
-   deleteOrder
+   deleteOrder,
+   checkOutOrder
 };

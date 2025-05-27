@@ -1,6 +1,6 @@
 import express from 'express';
 import auth from "../middlewares/auth.js";
-import { createOrder, deleteOrder, getAllOrders, getOrderById, getOrdersByUser, updateOrderStatus } from '../controllers/orderController.js';
+import { checkOutOrder, createOrder, deleteOrder, getAllOrders, getOrderById, getOrdersByUser, updateOrderStatus } from '../controllers/orderController.js';
 import roleBasedAuth from "../middlewares/roleBasedAuth.js";
 import { ROLE_ADMIN, ROLE_MERCHANT } from "../constants/roles.js";
 
@@ -22,6 +22,8 @@ router.post("/", auth, createOrder);
 router.put("/:id/status", auth, roleBasedAuth(ROLE_ADMIN), updateOrderStatus);
 
 router.delete("/:id", auth, roleBasedAuth(ROLE_ADMIN), deleteOrder);
+
+router.put("/:id/checkout", auth, checkOutOrder);
 
 
 export default router;
