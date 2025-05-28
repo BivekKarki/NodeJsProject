@@ -1,7 +1,8 @@
-import { ORDER_STATUS_PENDING } from '../constants/orderStatus.js';
+import { ORDER_STATUS_CONFIRMED, ORDER_STATUS_PENDING } from '../constants/orderStatus.js';
 import { ROLE_ADMIN } from '../constants/roles.js';
 import Order from '../models/Order.js';
 import payViaKhalti from '../utils/khalti.js';
+import paymentService from './paymentService.js';
 
 const getAllOrders = async (query)=> {
    // const filter = {}
@@ -85,6 +86,39 @@ const deleteOrder = async (id, status)=> {
    return await Order.findByIdAndDelete(id)
 }
 
+const confirmOrder = async (id, data)=> {
+   const order = await Order.findById(id)
+     
+   if(!order){
+      throw{
+         statusCode: 404,
+         message: "Order not found",
+      };
+   }
+
+   console.log("Payment status: ", data.status)
+   const isPaymentSuccess = data.status == "completed";
+
+  await paymentService.createPayment({
+   amount: order.totalPrice,
+   paymentMethod: data.paymentMethod || "online",
+   status: isPaymentSuccess ? "completed": "failed",
+   order: id,
+   tranactionId: data.tranactionId
+  })
+
+  if(!isPaymentSuccess) throw {
+   statusCode: 400,
+   message: "Payment failed",
+  }
+
+   return await Order.findByIdAndUpdate(
+      id, 
+      {status: ORDER_STATUS_CONFIRMED},
+      { new: true }
+   )
+}
+
 export default { 
    getAllOrders, 
    createOrder, 
@@ -92,5 +126,6 @@ export default {
    getOrderById,
    updateOrderStatus,
    deleteOrder,
-   checkOutOrder
+   checkOutOrder,
+   confirmOrder
 };
