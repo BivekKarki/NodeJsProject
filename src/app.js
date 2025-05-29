@@ -5,6 +5,7 @@ import connectDB from "./config/database.js";
 import productRoutes from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
+import viewRoute from "./routes/viewRoute.js";
 import orderRoute from "./routes/orderRoute.js";
 import logger from './middlewares/logger.js';
 import connectToCloudinary from './config/cloudinary.js';
@@ -29,6 +30,9 @@ app.use(logger);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.set('view engine', 'hbs');
 
 // app.get("/", (req, res)=>{
 //     res.send("<h1>Home Page</h1>");
@@ -62,10 +66,13 @@ app.get("/", (req, res)=>{
 //     res.send(`<h1>Product by id: ${id}</h1>`);
 // })
 
+
+
 app.use("/api/products", upload.array("images", 5), productRoutes);
 app.use("/api/users", upload.single("image"), userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/orders", orderRoute);
+app.use("/page", viewRoute);
 
 
 app.listen(port, ()=>{

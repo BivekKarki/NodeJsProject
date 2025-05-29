@@ -2,7 +2,7 @@ import express from 'express';
 import auth from "../middlewares/auth.js";
 import { checkOutOrder, confirmOrder, createOrder, deleteOrder, getAllOrders, getOrderById, getOrdersByUser, updateOrderStatus } from '../controllers/orderController.js';
 import roleBasedAuth from "../middlewares/roleBasedAuth.js";
-import { ROLE_ADMIN, ROLE_MERCHANT } from "../constants/roles.js";
+import { ROLE_ADMIN } from "../constants/roles.js";
 
 const router = express.Router();
 
