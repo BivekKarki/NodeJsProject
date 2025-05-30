@@ -43,58 +43,36 @@
 
 <div>
  
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 my-5">
-    <table class="w-full text-sm text-left rtl:text-right ">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3">Id</th>
-                <th scope="col" class="px-6 py-3">Product Name</th>
-                <th scope="col" class="px-6 py-3">Brand</th>
-                <th scope="col" class="px-6 py-3">Category</th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex">
-                        Price
-                        <button class="bg-gray-100 rounded border px-1 mx-1" onclick="sortByPrice(1)">A</button>
-                        <button class="bg-gray-100 rounded border px-1" onclick="sortByPrice(-1)">D</button>
-                        
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3 text-right">Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each products}}
-            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
-                <td class="px-6 py-4">
-                    <a href="/page/products/{{_id}}">{{_id}}</a>
-                </td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {{name}}
-                </th>
-                <td class="px-6 py-4">{{brand}}</td>
-                <td class="px-6 py-4">{{category}}</td>
-                <td class="px-6 py-4">Rs. {{price}}</td>
-                <td class="px-6 py-4 text-right">
-                    <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+
+<div class="flex justify-center py-16">
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm ">
+    <a href="#">
+        {{#if product.imageUrls.[0]}}
+          <img class="rounded-t-lg object-cover w-full" src="{{product.imageUrls.[0]}}" alt="{{product.name}}"  />
+        {{else}}
+          <span>No image</span>
+        {{/if}}
+        {{!-- <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" /> --}}
+    </a>
+    <div class="p-5">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">{{product.name}}</h5>
+        </a>
+        <div class="flex item-center">
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm ">{{product.brand}}</span>
+            <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm ">{{product.category}}</span>
+
+        </div>
+
+        <p class="mb-3 font-normal text-gray-700 ">{{product.description}}</p>
+        <h4 class="font-semibold text-xl text-yellow-700">Rs. {{product.price}}</h4>
+    </div>
 </div>
+</div>
+
 
 
 </div>
 
-<script>
-    function sortByPrice(order){
-        const sort = `sort=${JSON.stringify({ price: order })}`
-        const url = new URL(window.location.href);
-
-        url.searchParams.set("sort", JSON.stringify({ price: order }))
-
-        window.location.href = url
-    }
-</script>
 </body>
 </html>
