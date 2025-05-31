@@ -19,6 +19,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 connectDB();
+console.log(process.env.MONGODB_URL)
 connectToCloudinary();
 
 const upload = multer({
