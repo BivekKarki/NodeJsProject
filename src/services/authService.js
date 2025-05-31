@@ -28,13 +28,14 @@ const login = async (data)=> {
 }
 
 const register = async (data)=>{
-
+    console.log("Welcome service 1")
     const user = await User.findOne({
         $or: [
             {email: data.email},
             {phone: data.phone}
         ],
     });
+    console.log("Welcome service 2")
 
     if(user) {
         throw{
