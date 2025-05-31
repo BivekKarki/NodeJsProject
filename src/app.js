@@ -43,7 +43,8 @@ app.set('view engine', 'hbs');
 app.get("/", (req, res)=>{
     res.json({
         status: "OK",
-        version: "1.0.0",
+        version: "1.1.0",
+        author: "Bivek Karki",
         port: port,
     })
 })
