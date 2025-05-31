@@ -54,9 +54,9 @@ const register = async (req, res)=> {
 
         if(!PASSWORD_REGEX.test(password))
             return res.status(422).send("Invalid password: Password must contain uppercase lowercase character number")
-
+        console.log("Before service func...");
         const data = await authService.register(req.body);
-        
+        console.log("After service func...");
         const formattedData = formatUserData(data);
 
         const token = createJWT(formattedData);
