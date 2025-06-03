@@ -141,5 +141,9 @@ export {
     getProductById,
     updateProduct,
     deleteProduct,
-    getProductsByUserId
+    getProductsByUserId,
+    getBrands,
+    getCategories,
+    getProductsByBrand,
+    getProductsByCategory
 };

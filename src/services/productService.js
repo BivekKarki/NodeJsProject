@@ -103,7 +103,9 @@ export default {
     getAllProducts,
     getProductById,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getCategories,
+    getBrands
 };
 
 

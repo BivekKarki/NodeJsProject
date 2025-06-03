@@ -7,7 +7,9 @@ import {
     deleteProduct,
     getProductsByUserId,
     getProductsByCategory,
-    getProductsByBrand
+    getProductsByBrand,
+    getCategories,
+    getBrands
 } from "../controllers/productController.js";
 import auth from "../middlewares/auth.js";
 import roleBasedAuth from "../middlewares/roleBasedAuth.js";
