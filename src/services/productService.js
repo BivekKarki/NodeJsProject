@@ -90,6 +90,14 @@ const deleteProduct = async (id)=> {
     await Product.findByIdAndDelete(id);
 }
 
+const getCategories = async (id)=> {
+    await Product.distinct("category");
+}
+
+const getBrands = async (id)=> {
+    await Product.findByIdAndDelete("brand");
+}
+
 export default {
     createProduct, 
     getAllProducts,

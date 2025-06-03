@@ -5,7 +5,9 @@ import {
     getProductById,
     updateProduct, 
     deleteProduct,
-    getProductsByUserId
+    getProductsByUserId,
+    getProductsByCategory,
+    getProductsByBrand
 } from "../controllers/productController.js";
 import auth from "../middlewares/auth.js";
 import roleBasedAuth from "../middlewares/roleBasedAuth.js";
@@ -58,5 +60,11 @@ router.put("/:id", auth, roleBasedAuth(ROLE_MERCHANT), updateProduct);
  * Delete product
  */
 router.delete("/:id", auth, roleBasedAuth(ROLE_ADMIN), deleteProduct);
+
+router.get("/categories", getCategories);
+router.get("/brands", getBrands);
+
+router.get("/category/:category", getProductsByCategory);
+router.get("/brand/:brand", getProductsByBrand);
 
 export default router;

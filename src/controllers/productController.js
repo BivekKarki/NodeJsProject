@@ -97,6 +97,44 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+
+const getCategories = async (req, res) => {
+  const categories = await productService.getCategories();
+
+  res.json(categories);
+};
+
+const getBrands = async (req, res) => {
+  const brands = await productService.getBrands();
+
+  res.json(brands);
+};
+
+const getProductsByCategory = async (req, res) => {
+  const category = req.params.category;
+
+  const products = await productService.getAllProducts({ category });
+
+  const formattedProducts = products.map((product) =>
+    formatProductData(product)
+  );
+
+  res.json(formattedProducts);
+};
+
+const getProductsByBrand = async (req, res) => {
+  const brand = req.params.brand;
+
+  const products = await productService.getAllProducts({ brands: brand });
+
+  const formattedProducts = products.map((product) =>
+    formatProductData(product)
+  );
+
+  res.json(formattedProducts);
+};
+
+
 export {
     createProduct, 
     getAllProducts,
