@@ -63,8 +63,8 @@ router.put("/:id", auth, roleBasedAuth(ROLE_MERCHANT), updateProduct);
  */
 router.delete("/:id", auth, roleBasedAuth(ROLE_ADMIN), deleteProduct);
 
-router.get("/categories", getCategories);
-router.get("/brands", getBrands);
+// router.get("/categories", getCategories);
+// router.get("/brands", getBrands);
 
 router.get("/category/:category", getProductsByCategory);
 router.get("/brand/:brand", getProductsByBrand);
