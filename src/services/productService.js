@@ -1,5 +1,6 @@
 import Product from "../models/Product.js";
 import uploadFile from "../utils/file.js";
+import promptGemini from "../utils/gemini.js";
 
 //Database related task in service 
 
@@ -59,8 +60,12 @@ const getAllProducts = async (query, userId)=> {
 }
 
 const getProductById = async (id)=> {
+    console.log("Get product by id Service")
     const product = await Product.findById(id);
 
+    console.log("Get product by id Service")
+    const geminiResponse = await promptGemini(product)
+    console.log("YOOOOOOOO", geminiResponse)
     return product;
 }
 

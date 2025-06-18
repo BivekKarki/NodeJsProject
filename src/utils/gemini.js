@@ -1,15 +1,14 @@
 import axios from "axios"
 
-const geminiUrl = process.env.GEMINI_URL
-const geminiApiKey = process.env.GEMINI_API_KEY
-
 const promptGemini = async (product)=> {
+    const geminiUrl = process.env.GEMINI_URL
+    const geminiApiKey = process.env.GEMINI_API_KEY
     const data = {
-        contents: [
+        "contents": [
             {
-                parts:[
+                "parts":[
                     {
-                        text: `Generate a compelling product description 
+                        "text": `Generate a compelling product description 
                         for thr following item. Highlight its key features, 
                         benefits, and ideal use cases while maintaining an 
                         engaging and persuasive tone. Ensure the description 
@@ -23,8 +22,11 @@ const promptGemini = async (product)=> {
             }
         ]
    };
+   
+   const response = await axios.post(`${geminiUrl}?key=${geminiApiKey}`, JSON.stringify(data))
+   console.log("Gemini...")
 
-    await axios.post(`${geminiUrl}?key=${geminiApiKey}`, JSON.stringify(data))
+    return response.data.candidates[0]?.content.parts[0].text;
 }
 
 export default promptGemini;

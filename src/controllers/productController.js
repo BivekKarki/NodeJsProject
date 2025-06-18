@@ -24,6 +24,7 @@ const getProductsByUserId = async ()=>{
 }
 
 const getProductById =async (req, res)=> {
+    console.log("Get product by id controller")
     try {
         const id = req.params.id;
 
