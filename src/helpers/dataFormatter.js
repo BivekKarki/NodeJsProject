@@ -12,7 +12,7 @@ export const formatUserData = (data)=>{
 }
 
 
-export const formatProductData = (data, geminiPrompt)=>{
+export const formatProductData = (data)=>{
     return {
         createdAt: data.createdAt,
         id: data._id,
@@ -21,6 +21,6 @@ export const formatProductData = (data, geminiPrompt)=>{
         category: data.category,
         price: data.price,
         imageUrls: data.imageUrls,
-        description: geminiPrompt || data.description,
+        description: data.description,
     }
 }
