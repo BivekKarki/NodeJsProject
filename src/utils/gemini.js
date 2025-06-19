@@ -3,6 +3,7 @@ import axios from "axios"
 const promptGemini = async (product)=> {
     const geminiUrl = process.env.GEMINI_URL
     const geminiApiKey = process.env.GEMINI_API_KEY
+     
     const data = {
         "contents": [
             {
@@ -23,8 +24,8 @@ const promptGemini = async (product)=> {
         ]
    };
    
-   const response = await axios.post(`${geminiUrl}?key=${geminiApiKey}`, JSON.stringify(data))
-   console.log("Gemini...")
+   const response = await axios.post(
+    `${geminiUrl}?key=${geminiApiKey}`, data);
 
     return response.data.candidates[0]?.content.parts[0].text;
 }
