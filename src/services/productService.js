@@ -1,3 +1,4 @@
+import { formatProductData } from "../helpers/dataFormatter.js";
 import Product from "../models/Product.js";
 import uploadFile from "../utils/file.js";
 import promptGemini from "../utils/gemini.js";
@@ -57,16 +58,16 @@ const getAllProducts = async (query, userId)=> {
     .skip(offsetQuery);
 
     return products;
+
+    
 }
 
 const getProductById = async (id)=> {
-    console.log("Get product by id Service")
     const product = await Product.findById(id);
 
-    console.log("Get product by id Service")
     const geminiResponse = await promptGemini(product)
-    console.log("YOOOOOOOO", geminiResponse)
-    return product;
+    
+    return formatProductData(product, geminiResponse);
 }
 
 const createProduct = async (data, files, userId) =>{

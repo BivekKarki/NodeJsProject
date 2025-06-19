@@ -7,6 +7,20 @@ export const formatUserData = (data)=>{
         createdAt: data.createdAt,
         roles: data.roles,
         profileImageUrl: data?.profileImageUrl,
-        id: data.id,
+        id: data._id,
+    }
+}
+
+
+export const formatProductData = (data, geminiPrompt)=>{
+    return {
+        createdAt: data.createdAt,
+        id: data._id,
+        name: data.name,
+        brand: data.brand,
+        category: data.category,
+        price: data.price,
+        imageUrls: data.imageUrls,
+        description: geminiPrompt || data.description,
     }
 }
