@@ -87,8 +87,14 @@ const logout = (req, res)=>{
 const forgotPassword = async (req, res)=> {
     const email = req.body.email;
     if(!email) return res.status(422).send("Email is required.")
-    const data = await authService.forgotPassword(req.body.email)
-    res.json(data);
+   
+    try {
+        const data = await authService.forgotPassword(req.body.email)
+        res.json(data);
+    } catch (error) {
+        res.send(error.message)
+    }    
+    
 }
 
 /**

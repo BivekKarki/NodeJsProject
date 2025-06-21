@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import ResetPassword from "../models/ResetPassword.js"
+import sendEmail from '../utils/email.js';
 
 const login = async (data)=> {
     const user = await User.findOne({
@@ -75,6 +76,10 @@ const forgotPassword = async (email)=> {
 
     // send email to user
     // {{apiUrl}}/api/auth/reset-password/:userId?token=<otp>
+    await sendEmail(email, {
+        subject: "Reset password link",
+        body: `http://localhost:5000/api/auth/reset-password/${user._id}/?token=${otp}`
+    });
 
     return {message:"Reset password link has been sent to your email! "}
 
