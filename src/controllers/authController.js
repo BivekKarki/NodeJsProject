@@ -25,7 +25,7 @@ const login = async (req, res)=> {
 
         res.cookie("authToken", token);
         
-        res.json(formattedData);
+        res.json({...formattedData, token});
     }catch (error) {
         res.status(500).send(error.message);
     }
@@ -63,7 +63,8 @@ const register = async (req, res)=> {
         
         res.cookie("authToken", token);
 
-        res.json(formatUserData(data));
+        // res.json(formatUserData(data));
+        res.json({...formattedData, token});
     }catch (error) {
         res.status(error.statusCode || 500).send(error.message);
     }
