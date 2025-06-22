@@ -1,12 +1,14 @@
 
 import { ROLE_ADMIN } from "../constants/roles.js";
+import { formatProductData } from "../helpers/dataFormatter.js";
 import productService from "../services/productService.js";
 
 
 const getAllProducts = async (req, res)=> {
     try {
         const products = await productService.getAllProducts(req.query);
-        res.json(products);
+        const formattedProducts = products.map((product)=> formatProductData(product));
+        res.json(formattedProducts);
     } catch (error) {
         res.status(500).send(error.message);
         
