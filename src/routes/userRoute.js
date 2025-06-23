@@ -28,4 +28,7 @@ router.get("/:id",auth, roleBasedAuth(ROLE_MERCHANT), getUserById);
 router.put("/profile/upload",auth, uploadProfileImage);
 
 
+router.put("/:id/profile-image",auth, uploadProfileImage);
+
+
 export default router
