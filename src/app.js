@@ -10,7 +10,7 @@ import orderRoute from "./routes/orderRoute.js";
 import logger from './middlewares/logger.js';
 import connectToCloudinary from './config/cloudinary.js';
 import multer from 'multer';
-
+import cors from "cors";
 
 dotenv.config();
 
@@ -27,6 +27,8 @@ const upload = multer({
 })
 
 app.use(logger);
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
